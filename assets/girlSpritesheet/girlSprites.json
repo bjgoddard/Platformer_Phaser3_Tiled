@@ -1,0 +1,251 @@
+{
+	"textures": [
+		{
+			"image": "girlSprites.png",
+			"format": "RGBA8888",
+			"size": {
+				"w": 937,
+				"h": 1747
+			},
+			"scale": 1,
+			"frames": [
+				{
+					"filename": "dead1.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 601,
+						"h": 502
+					},
+					"spriteSourceSize": {
+						"x": 171,
+						"y": 196,
+						"w": 425,
+						"h": 295
+					},
+					"frame": {
+						"x": 1,
+						"y": 1,
+						"w": 425,
+						"h": 295
+					}
+				},
+				{
+					"filename": "run1.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 416,
+						"h": 454
+					},
+					"spriteSourceSize": {
+						"x": 28,
+						"y": 19,
+						"w": 355,
+						"h": 427
+					},
+					"frame": {
+						"x": 428,
+						"y": 1,
+						"w": 355,
+						"h": 427
+					}
+				},
+				{
+					"filename": "run5.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 416,
+						"h": 454
+					},
+					"spriteSourceSize": {
+						"x": 33,
+						"y": 7,
+						"w": 325,
+						"h": 428
+					},
+					"frame": {
+						"x": 1,
+						"y": 298,
+						"w": 325,
+						"h": 428
+					}
+				},
+				{
+					"filename": "run3.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 416,
+						"h": 454
+					},
+					"spriteSourceSize": {
+						"x": 73,
+						"y": 6,
+						"w": 301,
+						"h": 431
+					},
+					"frame": {
+						"x": 328,
+						"y": 430,
+						"w": 301,
+						"h": 431
+					}
+				},
+				{
+					"filename": "idle2.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 416,
+						"h": 454
+					},
+					"spriteSourceSize": {
+						"x": 68,
+						"y": 17,
+						"w": 304,
+						"h": 436
+					},
+					"frame": {
+						"x": 631,
+						"y": 430,
+						"w": 304,
+						"h": 436
+					}
+				},
+				{
+					"filename": "idle3.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 416,
+						"h": 454
+					},
+					"spriteSourceSize": {
+						"x": 66,
+						"y": 19,
+						"w": 309,
+						"h": 434
+					},
+					"frame": {
+						"x": 1,
+						"y": 728,
+						"w": 309,
+						"h": 434
+					}
+				},
+				{
+					"filename": "idle4.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 416,
+						"h": 454
+					},
+					"spriteSourceSize": {
+						"x": 68,
+						"y": 17,
+						"w": 304,
+						"h": 436
+					},
+					"frame": {
+						"x": 312,
+						"y": 863,
+						"w": 304,
+						"h": 436
+					}
+				},
+				{
+					"filename": "run2.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 416,
+						"h": 454
+					},
+					"spriteSourceSize": {
+						"x": 55,
+						"y": 8,
+						"w": 310,
+						"h": 437
+					},
+					"frame": {
+						"x": 618,
+						"y": 868,
+						"w": 310,
+						"h": 437
+					}
+				},
+				{
+					"filename": "idle1.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 416,
+						"h": 454
+					},
+					"spriteSourceSize": {
+						"x": 76,
+						"y": 13,
+						"w": 287,
+						"h": 440
+					},
+					"frame": {
+						"x": 1,
+						"y": 1164,
+						"w": 287,
+						"h": 440
+					}
+				},
+				{
+					"filename": "run4.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 416,
+						"h": 454
+					},
+					"spriteSourceSize": {
+						"x": 62,
+						"y": 7,
+						"w": 314,
+						"h": 444
+					},
+					"frame": {
+						"x": 290,
+						"y": 1301,
+						"w": 314,
+						"h": 444
+					}
+				},
+				{
+					"filename": "jump1.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 416,
+						"h": 454
+					},
+					"spriteSourceSize": {
+						"x": 32,
+						"y": 1,
+						"w": 330,
+						"h": 439
+					},
+					"frame": {
+						"x": 606,
+						"y": 1307,
+						"w": 330,
+						"h": 439
+					}
+				}
+			]
+		}
+	],
+	"meta": {
+		"app": "https://www.codeandweb.com/texturepacker",
+		"version": "3.0",
+		"smartupdate": "$TexturePacker:SmartUpdate:a1d4cd80dcce963084244d9ece29dbf7:9a52a82f7fcabcae681b2cd068799108:32451df3562bfe60c6f3cec25bc62376$"
+	}
+}
