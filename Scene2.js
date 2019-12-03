@@ -3,24 +3,8 @@ class Scene2 extends Phaser.Scene {
         super("playGame")
     }
 
-    create() {
+create() {
 
-// STATIC BACKGROUND
-        // Creating background images
-        // this.background1 = this.add.image(0, 0, "background1")
-        // //Set images to start at top left
-        // this.background1.setOrigin(0, 0)
-        // //Scaling x4 because images small
-        // this.background1.setScale(4)
-        // this.background2 = this.add.image(0, 0, "background2")
-        // this.background2.setOrigin(0, 0)
-        // this.background2.setScale(4)
-        // this.background2 = this.add.image(0, 0, "background3")
-        // this.background2.setOrigin(0, 0)
-        // this.background2.setScale(4)
-        // this.background2 = this.add.image(0, 0, "background4")
-        // this.background2.setOrigin(0, 0)
-        // this.background2.setScale(4)
         
 
     //PARALLAX BACKGROUND
@@ -36,22 +20,19 @@ class Scene2 extends Phaser.Scene {
         this.background4 = this.add.tileSprite(0, 0, game.config.width, game.config.height, "background4")
         this.background4.setOrigin(0, 0)
         this.background4.setScrollFactor(0)
-        // this.background1.setTileScale(4, 4)
-        // this.background2.setTileScale(4, 4)
-        // this.background3.setTileScale(4, 4)
-        // this.background4.setTileScale(4, 4)
+        this.background5 = this.add.tileSprite(0, 0, game.config.width, game.config.height, "background5")
+            this.background5.setOrigin(0, 0)
+            this.background5.setScrollFactor(0)
+            this.background5.visible = false
+            this.background6 = this.add.tileSprite(0, 0, game.config.width, game.config.height, "background6")
+            this.background6.setOrigin(0, 0)
+            this.background6.setScrollFactor(0)
+            this.background6.visible = false
 
-     
-
-        //Adding platforms
-        platforms = this.physics.add.staticGroup()
-        platforms.create(70, 165, 'ground')
-        platforms
-      
         //Adding Player
-        player = this.physics.add.sprite(40, 90, 'girl', 'idle1.png')
-        player.displayWidth = 20;
-        player.displayHeight = 20;
+        player = this.physics.add.sprite(40, 90, 'girl', 'idle1.png').setDepth(1)
+        player.displayWidth = 16;
+        player.displayHeight = 16;
 
 
         player.setBounce(0)
@@ -71,7 +52,13 @@ class Scene2 extends Phaser.Scene {
             }),
             
         })
-        
+        this.anims.create({
+            key: 'dead',
+            frameRate: 1,
+            repeat: -1,
+            frames: [{key: 'girl', frame: 'dead1.png'}]
+        })
+
         this.anims.create(
             {key: 'run',
             frames: this.anims.generateFrameNames('girl', {
@@ -80,25 +67,18 @@ class Scene2 extends Phaser.Scene {
                 start: 1,
                 end: 5,
              }),
-            frameRate: 10,
+            frameRate: 7,
             repeat: -1
         })
         this.anims.create({
             key: 'jump',
-            frameRate: 10,
+            frameRate: 7,
             repeat: -1,
             frames: [{key: 'girl', frame: 'jump1.png'}],
-           
         })
-    
 
         //Add player controls
         this.cursors = this.input.keyboard.createCursorKeys();
-
-        //OLD detect player/platform collision
-        // this.physics.add.collider(player, platforms)
-
-        this.add.text(20, 20, "Playing game", {font: "25px Arial", fill: "yellow"})
 
         //Tiled map
         let map = this.add.tilemap("map")
@@ -108,10 +88,15 @@ class Scene2 extends Phaser.Scene {
 
         //layers
         
-    let terrain = map.createStaticLayer("terrain", [level1, level2], -60, 20)
-        let spikes = map.createStaticLayer("spikes", [level1], 0, 0)
-        let water = map.createStaticLayer("water", [level2], 0, 0)
+        let terrain = map.createDynamicLayer("terrain", [level1, level2], -60, 20)
         
+    
+
+
+
+
+
+
         //collision
         this.physics.add.collider(player, terrain)
         terrain.setCollisionByProperty({collision: true})
@@ -125,16 +110,68 @@ class Scene2 extends Phaser.Scene {
         //make camera follow player
         this.cameras.main.startFollow(player)
 
+//MAP EVENTS WHEN PLAYER REACHES TILE
+        //Camera shake on reach first button
+        terrain.setTileLocationCallback(49, 7, 2, 1, () => {
+            console.log("Camera Shake Event")
 
- }
+            //REMOVE THIS.CURSORS LISTENER HELP BRANDI
+            
+           
+
+            
+            
+            this.cameras.main.shake(3000, 0.03, false)
+            
+            
+            
+            //Play sound
+
+        //HOW MAKE GIRL PLAY DEAD ????
+            player.anims.play('dead', true)
+           
+
+            terrain.setTileLocationCallback(49, 7, 2, 1, null)
+        })
+        //Move girlsprite during camera shake
+        this.cameras.main.on('camerashakestart', function () {
+            player.anims.play('dead', true)
+            // player.anims.play('dead', true)
+            for (let i = 0; i < 10; i++) {
+                setTimeout( function timer() {
+                    player.x += 10
+                    player.anims.play('dead', true)
+                }, i * 200)
+            }
+        })
+        this.cameras.main.on('camerashakecomplete', function () {
+            console.log("camera shake complete")
+            player.anims.play('dead', true)
+            this.cameras.main.fade(2000)
+            
+        }, this)
+        this.cameras.main.once('camerafadeoutcomplete',function (camera) {
+            //Add new background
+            this.background5.visible = true
+            this.background6.visible = true
+            
+            camera.fadeIn(5000)
+            }, this)
+        }
+
 
 
 
     update() {
             //Player controls and animations
+            // if (this.cameras.main.shake.isRunning == true) {
+            //     console.log("camera test 1")
+            // }
+
+
             if (this.cursors.left.isDown)
             {
-                player.setVelocityX(-70);
+                player.setVelocityX(-200);
                 //Flip sprite to left
                 player.flipX = true;
                 if (player.body.onFloor()){
@@ -144,7 +181,7 @@ class Scene2 extends Phaser.Scene {
             }
             else if (this.cursors.right.isDown)
             {
-                player.setVelocityX(70);
+                player.setVelocityX(200);
                 player.flipX = false;
                 if (player.body.onFloor()){
                 player.anims.play('run', true);
@@ -161,11 +198,22 @@ class Scene2 extends Phaser.Scene {
 
             if (this.cursors.up.isDown && player.body.onFloor())
             {
-                player.setVelocityY(-100);
+                player.setVelocityY(-200);
                 player.anims.stop()
                 player.anims.play('jump', true);
             }
+            //Camera shake move function?
+            if (this.cameras.main.shake.isRunning == true) {
+                console.log("camera test 1")
 
+            }
+        //parallax background
+        this.background1.tilePositionX = this.cameras.main.scrollX * .1
+        this.background2.tilePositionX = this.cameras.main.scrollX * .2
+        this.background3.tilePositionX = this.cameras.main.scrollX * .3
+        this.background4.tilePositionX = this.cameras.main.scrollX * .4
+        this.background5.tilePositionX = this.cameras.main.scrollX * .2
+        this.background6.tilePositionX = this.cameras.main.scrollX * .6
 
 
     }
