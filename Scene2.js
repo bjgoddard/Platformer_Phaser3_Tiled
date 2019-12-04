@@ -5,7 +5,7 @@ class Scene2 extends Phaser.Scene {
 
 create() {
 
-        
+
 
     //PARALLAX BACKGROUND
         this.background1 = this.add.tileSprite(0, 0, game.config.width, game.config.height, "background1")
@@ -33,13 +33,13 @@ create() {
         player = this.physics.add.sprite(40, 90, 'girl', 'idle1.png').setDepth(1)
         player.displayWidth = 16;
         player.displayHeight = 16;
-
+        player.dead = false
 
         player.setBounce(0)
         player.setCollideWorldBounds(true)
 
         //ANIMATIONS
-        
+
         this.anims.create({
             key: 'idle',
             frameRate: 3,
@@ -50,7 +50,7 @@ create() {
                 start: 1,
                 end: 4,
             }),
-            
+
         })
         this.anims.create({
             key: 'dead',
@@ -87,20 +87,12 @@ create() {
         let level2 = map.addTilesetImage("tilesets")
 
         //layers
-        
         let terrain = map.createDynamicLayer("terrain", [level1, level2], -60, 20)
-        
-    
-
-
-
-
-
 
         //collision
         this.physics.add.collider(player, terrain)
         terrain.setCollisionByProperty({collision: true})
-        
+
         //set boundaries of game world
         this.physics.world.bounds.width = terrain.width;
         this.physics.world.bounds.height = terrain.height;
@@ -116,45 +108,32 @@ create() {
             console.log("Camera Shake Event")
 
             //REMOVE THIS.CURSORS LISTENER HELP BRANDI
-            
-           
 
-    
-            
             this.cameras.main.shake(3000, 0.03, false)
-            
-            
-            
+            player.dead = true
+            player.x += 50
             //Play sound
 
-        //HOW MAKE GIRL PLAY DEAD ????
+            //HOW MAKE GIRL PLAY DEAD ????
             player.anims.play('dead', true)
-           
-
             terrain.setTileLocationCallback(49, 7, 2, 1, null)
         })
         //Move girlsprite during camera shake
         this.cameras.main.on('camerashakestart', function () {
             player.anims.play('dead', true)
-            // player.anims.play('dead', true)
-            for (let i = 0; i < 10; i++) {
-                setTimeout( function timer() {
-                    player.x += 10
-                    player.anims.play('dead', true)
-                }, i * 200)
-            }
         })
         this.cameras.main.on('camerashakecomplete', function () {
             console.log("camera shake complete")
             player.anims.play('dead', true)
             this.cameras.main.fade(2000)
-            
+
         }, this)
         this.cameras.main.once('camerafadeoutcomplete',function (camera) {
             //Add new background
             this.background5.visible = true
             this.background6.visible = true
-            
+            player.dead = false
+            console.log('camerafadeoutcomplete')
             camera.fadeIn(5000)
             }, this)
 
@@ -222,7 +201,7 @@ create() {
             //     console.log("camera test 1")
             // }
 
-
+          if (!player.dead) {
             if (this.cursors.left.isDown)
             {
                 player.setVelocityX(-200);
@@ -230,28 +209,26 @@ create() {
                 player.flipX = true;
                 if (player.body.onFloor()){
                 player.anims.play('run', true);
-            
+
                 }
             }
             else if (this.cursors.right.isDown)
             {
-                player.setVelocityX(200);
-                player.flipX = false;
-                if (player.body.onFloor()){
+              player.setVelocityX(200);
+              player.flipX = false;
+              if (player.body.onFloor()){
                 player.anims.play('run', true);
-                
+              }
             }
-        }
             else
             {
-                player.setVelocityX(0);
-                if (player.body.onFloor()){
+              player.setVelocityX(0);
+              if (player.body.onFloor()){
                 player.anims.play('idle', true);
-                }
+              }
             }
 
-            if (this.cursors.up.isDown && player.body.onFloor())
-            {
+            if (this.cursors.up.isDown && player.body.onFloor()) {
                 player.setVelocityY(-200);
                 player.anims.stop()
                 player.anims.play('jump', true);
@@ -259,8 +236,9 @@ create() {
             //Camera shake move function?
             if (this.cameras.main.shake.isRunning == true) {
                 console.log("camera test 1")
-
             }
+          }
+
         //parallax background
         this.background1.tilePositionX = this.cameras.main.scrollX * .1
         this.background2.tilePositionX = this.cameras.main.scrollX * .2
@@ -271,6 +249,6 @@ create() {
 
 
     }
-    
-    
+
+
 }
