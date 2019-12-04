@@ -136,7 +136,61 @@ create() {
             console.log('camerafadeoutcomplete')
             camera.fadeIn(5000)
             }, this)
-        }
+
+
+        //Grass spikes
+            terrain.setTileLocationCallback(16, 6, 5, 1, () => {
+                //Kill player
+                console.log("KILL AND RESTART")
+            })
+            terrain.setTileLocationCallback(22, 7, 3, 1, () => {
+                //Kill player
+                console.log("KILL AND RESTART")
+            })
+
+            terrain.setTileLocationCallback(25, 8, 4, 1, () => {
+                //Kill player
+                console.log("KILL AND RESTART")
+            })
+
+            terrain.setTileLocationCallback(29, 9, 3, 1, () => {
+                //Kill player
+                console.log("KILL AND RESTART")
+            })
+
+            terrain.setTileLocationCallback(32, 10, 2, 1, () => {
+                //Kill player
+                console.log("KILL AND RESTART")
+            })
+
+        //Cave spikes
+        terrain.setTileLocationCallback(32, 10, 2, 1, () => {
+            //Kill player
+            console.log("KILL AND RESTART")
+        })
+        terrain.setTileLocationCallback(32, 10, 2, 1, () => {
+            //Kill player
+            console.log("KILL AND RESTART")
+        })
+        terrain.setTileLocationCallback(32, 10, 2, 1, () => {
+            //Kill player
+            console.log("KILL AND RESTART")
+        })
+        terrain.setTileLocationCallback(32, 10, 2, 1, () => {
+            //Kill player
+            console.log("KILL AND RESTART")
+        })
+        terrain.setTileLocationCallback(32, 10, 2, 1, () => {
+            //Kill player
+            console.log("KILL AND RESTART")
+        })
+
+
+
+
+     }
+
+        
 
 
 
