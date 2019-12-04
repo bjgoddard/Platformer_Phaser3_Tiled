@@ -1,11 +1,15 @@
-class Scene2 extends Phaser.Scene {
+// import Phaser from "./phaser.min.js";
+// // import player from "player.js";
+
+
+ class Scene2 extends Phaser.Scene {
     constructor() {
         super("playGame")
     }
 
 create() {
 
-
+    
 
     //PARALLAX BACKGROUND
         this.background1 = this.add.tileSprite(0, 0, game.config.width, game.config.height, "background1")
@@ -29,14 +33,30 @@ create() {
             this.background6.setScrollFactor(0)
             this.background6.visible = false
 
-        //Adding Player
+        // //Adding Player
         player = this.physics.add.sprite(40, 90, 'girl', 'idle1.png').setDepth(1)
         player.displayWidth = 16;
         player.displayHeight = 16;
-        player.dead = false
+        player.dead = false;
 
         player.setBounce(0)
         player.setCollideWorldBounds(true)
+
+        //Player die functions
+        const killPlayer = () => {
+            //Play death sound
+            player.dead = true;
+            player.setVelocityX(0);
+            player.anims.play('dead', true)
+            let killTimer = this.time.delayedCall(3000, killPlayerReset);
+        }
+
+        const killPlayerReset = () => {
+            console.log("killPlayerReset called")
+            this.scene.restart()
+            
+        }
+          
 
         //ANIMATIONS
 
@@ -111,7 +131,7 @@ create() {
 
             this.cameras.main.shake(3000, 0.03, false)
             player.dead = true
-            player.x += 50
+            player.x += 75
             //Play sound
 
             //HOW MAKE GIRL PLAY DEAD ????
@@ -133,6 +153,7 @@ create() {
             this.background5.visible = true
             this.background6.visible = true
             player.dead = false
+            console.log(player.x)
             console.log('camerafadeoutcomplete')
             camera.fadeIn(5000)
             }, this)
@@ -141,54 +162,72 @@ create() {
         //Grass spikes
             terrain.setTileLocationCallback(16, 6, 5, 1, () => {
                 //Kill player
+                 killPlayer();
+                // player.dead = true
+                // player.anims.play('dead', true)
+                // let killTimer = this.time.delayedCall(3000, killPlayerReset);
+
+                
+                
                 console.log("KILL AND RESTART")
+
             })
             terrain.setTileLocationCallback(22, 7, 3, 1, () => {
-                //Kill player
-                console.log("KILL AND RESTART")
+                killPlayer();
             })
 
             terrain.setTileLocationCallback(25, 8, 4, 1, () => {
-                //Kill player
-                console.log("KILL AND RESTART")
+                killPlayer();
             })
 
             terrain.setTileLocationCallback(29, 9, 3, 1, () => {
-                //Kill player
-                console.log("KILL AND RESTART")
+                killPlayer();
             })
 
             terrain.setTileLocationCallback(32, 10, 2, 1, () => {
-                //Kill player
-                console.log("KILL AND RESTART")
+                killPlayer();
             })
 
         //Cave spikes
-        terrain.setTileLocationCallback(32, 10, 2, 1, () => {
-            //Kill player
-            console.log("KILL AND RESTART")
+        terrain.setTileLocationCallback(48, 40, 3, 1, () => {
+            killPlayer();
         })
-        terrain.setTileLocationCallback(32, 10, 2, 1, () => {
-            //Kill player
-            console.log("KILL AND RESTART")
+        terrain.setTileLocationCallback(44, 40, 1, 1, () => {
+            killPlayer();
         })
-        terrain.setTileLocationCallback(32, 10, 2, 1, () => {
-            //Kill player
-            console.log("KILL AND RESTART")
+        terrain.setTileLocationCallback(42, 41, 1, 1, () => {
+            killPlayer();
         })
-        terrain.setTileLocationCallback(32, 10, 2, 1, () => {
-            //Kill player
-            console.log("KILL AND RESTART")
+        terrain.setTileLocationCallback(38, 42, 2, 1, () => {
+            killPlayer();
         })
-        terrain.setTileLocationCallback(32, 10, 2, 1, () => {
-            //Kill player
-            console.log("KILL AND RESTART")
+        terrain.setTileLocationCallback(35, 44, 1, 1, () => {
+            killPlayer();  
         })
-
-
-
-
+        terrain.setTileLocationCallback(31, 45, 2, 1, () => {
+            killPlayer();
+        })
+        terrain.setTileLocationCallback(27, 45, 2, 1, () => {
+            killPlayer();
+        })
+        terrain.setTileLocationCallback(6, 55, 3, 1, () => {
+            killPlayer();
+        })
+        terrain.setTileLocationCallback(15, 55, 3, 1, () => {
+            killPlayer();
+        })
+        terrain.setTileLocationCallback(9, 54, 1, 1, () => {
+            killPlayer();
+        })
+        terrain.setTileLocationCallback(14, 54, 1, 1, () => {
+            killPlayer();
+        })
+        terrain.setTileLocationCallback(17, 23, 1, 1, () => {
+            killPlayer();
+        })
+    
      }
+     
 
         
 
@@ -196,10 +235,7 @@ create() {
 
 
     update() {
-            //Player controls and animations
-            // if (this.cameras.main.shake.isRunning == true) {
-            //     console.log("camera test 1")
-            // }
+            
 
           if (!player.dead) {
             if (this.cursors.left.isDown)
@@ -233,10 +269,6 @@ create() {
                 player.anims.stop()
                 player.anims.play('jump', true);
             }
-            //Camera shake move function?
-            if (this.cameras.main.shake.isRunning == true) {
-                console.log("camera test 1")
-            }
           }
 
         //parallax background
@@ -248,7 +280,18 @@ create() {
         this.background6.tilePositionX = this.cameras.main.scrollX * .6
 
 
-    }
 
+    }
+    
 
 }
+
+
+// Maybe fix first button x push
+// var timer = scene.time.addEvent({
+//     delay: 500,                // ms
+//     callback: callback,
+//     //args: [],
+//     callbackScope: thisArg,
+//     repeat: 4
+// });

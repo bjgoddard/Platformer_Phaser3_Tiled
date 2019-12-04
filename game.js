@@ -1,5 +1,9 @@
+// import Phaser from "./phaser.min.js";
+// import Scene1 from "./Scene1.js"
+// import Scene2 from "./Scene2.js"
 
-let gameConfig = {
+
+const gameConfig = {
     type: Phaser.AUTO,
     width: 272,
     height: 160,
@@ -17,9 +21,9 @@ let gameConfig = {
     },
     scene: [Scene1, Scene2]
 }
-let game;
+
 let platforms;
 let player;
 
 
-game = new Phaser.Game(gameConfig);
+const game = new Phaser.Game(gameConfig);

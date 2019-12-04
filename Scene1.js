@@ -1,3 +1,4 @@
+// import Phaser from "./phaser.min.js";
 class Scene1 extends Phaser.Scene {
     constructor() {
         super("bootGame")
