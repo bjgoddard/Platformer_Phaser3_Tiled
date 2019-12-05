@@ -1,33 +1,23 @@
-// // import phaser from "phaser"
+class Player extends Phaser.Physics.Arcade.Sprite {
 
-// class Player extends Phaser.GameObjects.Sprite {
-//       constructor(config) {
-//         super(config.scene, config.x, config.y, "player");
-//         config.scene.add.existing(this)
-//     }
-// }
-  
-    
+    constructor (scene, x, y, texture, frame) {
+        super(scene, x, y, texture, frame);
+        scene.sys.updateList.add(this);
+        scene.sys.displayList.add(this);
 
-//     //Adding Player
-//     // player = this.physics.add.sprite(40, 90, 'girl', 'idle1.png').setDepth(1)
-//     player.displayWidth = 16;
-//     player.displayHeight = 16;
-//     player.dead = false;
-//     player.setBounce(0);
-//     player.setCollideWorldBounds(true);
+        scene.physics.world.enableBody(this)
+        this.displayWidth = 16;
+        this.displayHeight = 16;
+        this.dead = false;
+        this.setBounce(-.1)
+        this.setCollideWorldBounds(true)
+    }
 
-//     // Kill player function
-//   const killPlayer = () => {
-//       //Play death sound
-//       player.dead = true;
-//       player.setVelocityX(0);
-//       player.anims.play('dead', true)
-//       let killTimer = this.time.delayedCall(3000, killPlayerReset);
-//   }
-
-//   const killPlayerReset = () => {
-//       console.log("killPlayerReset called")
-//       this.scene.restart()
-//   }
-    
+    create() {
+        
+        
+    }
+    update() {
+        
+    }
+}

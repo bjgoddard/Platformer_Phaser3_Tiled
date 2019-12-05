@@ -1,15 +1,15 @@
-// import Phaser from "./phaser.min.js";
-// // import player from "player.js";
-
-
- class Scene2 extends Phaser.Scene {
+class Scene2 extends Phaser.Scene {
     constructor() {
         super("playGame")
     }
 
 create() {
 
-    
+
+// audio.play();
+    const lostWoods = this.sound.add('lostWoods', {volume: 0.2})
+    // lostWoods.play()
+   
 
     //PARALLAX BACKGROUND
         this.background1 = this.add.tileSprite(0, 0, game.config.width, game.config.height, "background1")
@@ -25,22 +25,19 @@ create() {
         this.background4.setOrigin(0, 0)
         this.background4.setScrollFactor(0)
         this.background5 = this.add.tileSprite(0, 0, game.config.width, game.config.height, "background5")
-            this.background5.setOrigin(0, 0)
-            this.background5.setScrollFactor(0)
-            this.background5.visible = false
-            this.background6 = this.add.tileSprite(0, 0, game.config.width, game.config.height, "background6")
-            this.background6.setOrigin(0, 0)
-            this.background6.setScrollFactor(0)
-            this.background6.visible = false
+        this.background5.setOrigin(0, 0)
+        this.background5.setScrollFactor(0)
+        this.background5.visible = false
+        this.background6 = this.add.tileSprite(0, 0, game.config.width, game.config.height, "background6")
+        this.background6.setOrigin(0, 0)
+        this.background6.setScrollFactor(0)
+        this.background6.visible = false
+
 
         // //Adding Player
-        player = this.physics.add.sprite(40, 90, 'girl', 'idle1.png').setDepth(1)
-        player.displayWidth = 16;
-        player.displayHeight = 16;
-        player.dead = false;
-
-        player.setBounce(-.1)
-        player.setCollideWorldBounds(true)
+        // player = this.physics.add.sprite(40, 90, 'girl', 'idle1.png').setDepth(1)
+        player = new Player(this, 40, 90, 'girl', 'idle1.png')
+        
         
 
         //Player die functions
@@ -59,7 +56,7 @@ create() {
         }
           
 
-        //ANIMATIONS
+        // ANIMATIONS
 
         this.anims.create({
             key: 'idle',
@@ -426,13 +423,19 @@ create() {
             }
           }
           
-        //parallax background
+        // parallax background
         this.background1.tilePositionX = this.cameras.main.scrollX * .1
         this.background2.tilePositionX = this.cameras.main.scrollX * .2
         this.background3.tilePositionX = this.cameras.main.scrollX * .3
         this.background4.tilePositionX = this.cameras.main.scrollX * .4
         this.background5.tilePositionX = this.cameras.main.scrollX * .2
         this.background6.tilePositionX = this.cameras.main.scrollX * .6
+        // background1.tilePositionX = this.cameras.main.scrollX * .1
+        // background2.tilePositionX = this.cameras.main.scrollX * .2
+        // background3.tilePositionX = this.cameras.main.scrollX * .3
+        // background4.tilePositionX = this.cameras.main.scrollX * .4
+        // background5.tilePositionX = this.cameras.main.scrollX * .2
+        // background6.tilePositionX = this.cameras.main.scrollX * .6
 
         
     }

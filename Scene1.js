@@ -12,6 +12,8 @@ class Scene1 extends Phaser.Scene {
         this.load.image("background6", "assets/image/level2/middleground.png")
         this.load.image("platform", "assets/image/platform.png")
         this.load.image("fireball", "assets/image/fireball.png")
+        this.load.audio("lostWoods", "assets/audio/Lost Woods.mp3")
+        
         
         this.load.atlas("girl", "assets/girlSpritesheet/girlSprites.png", "assets/girlSpritesheet/girlSprites.json")
         
@@ -24,9 +26,11 @@ class Scene1 extends Phaser.Scene {
         }
         //add loading bar
         
+        
 
     create(){
         this.scene.start("playGame")
+        
 
         }
 
