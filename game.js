@@ -1,6 +1,4 @@
-// import Phaser from "./phaser.min.js";
-// import Scene1 from "./Scene1.js"
-// import Scene2 from "./Scene2.js"
+
 
 
 const gameConfig = {

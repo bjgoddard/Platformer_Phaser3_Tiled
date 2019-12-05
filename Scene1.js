@@ -3,7 +3,6 @@ class Scene1 extends Phaser.Scene {
     constructor() {
         super("bootGame")
     }
-
     preload(){
         this.load.image("background2", "assets/backgroundimages/parallax-forest-lights.png")
         this.load.image("background1", "assets/backgroundimages/parallax-forest-back-trees.png")
@@ -11,6 +10,8 @@ class Scene1 extends Phaser.Scene {
         this.load.image("background4", "assets/backgroundimages/parallax-forest-front-trees.png")
         this.load.image("background5", "assets/image/level2/background.png")
         this.load.image("background6", "assets/image/level2/middleground.png")
+        this.load.image("platform", "assets/image/platform.png")
+        this.load.image("fireball", "assets/image/fireball.png")
         
         this.load.atlas("girl", "assets/girlSpritesheet/girlSprites.png", "assets/girlSpritesheet/girlSprites.json")
         

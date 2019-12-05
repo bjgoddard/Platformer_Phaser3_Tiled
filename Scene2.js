@@ -39,8 +39,9 @@ create() {
         player.displayHeight = 16;
         player.dead = false;
 
-        player.setBounce(0)
+        player.setBounce(-.1)
         player.setCollideWorldBounds(true)
+        
 
         //Player die functions
         const killPlayer = () => {
@@ -117,11 +118,156 @@ create() {
         this.physics.world.bounds.width = terrain.width;
         this.physics.world.bounds.height = terrain.height;
 
-        //set bounds so camera won't exit game world
+       
+        
+        //Fireballs
+
+    
+
+    var fireParticles = this.add.particles('fireball');
+    fireParticles.setScale(.5)
+    fireParticles.createEmitter({
+        
+        x: 64,
+        y: { min: 500, max: 700, steps:  3},
+        lifespan: 1700,
+        accelerationX: 200,
+        scale: 0.1,
+        frequency: 1000,
+        deathZone: { type: 'onEnter', source: fireCollision}
+    });
+    var fireCollision = {
+        contains: function (x, y)
+        {
+            var hit = player.body.hitTest(x, y);
+    
+            if (hit) {killPlayer()}
+    
+            return hit;
+        }
+    };
+
+    // var emitter = particles.createEmitter()
+    // emitter.setPosition(200, 400)
+    // emitter.setSpeed(200)
+    // emitter.setBlendMode(Phaser.BlendModes.ADD)
+        
+        
+        //Platforms + moving ?
+     var platform = this.physics.add.image(100, 470, 'platform').setImmovable(true)
+        
+        platform.setScale(.6)
+        platform.body.setAllowGravity(false);
+        platform.body.friction.y = 1;
+        this.tweens.timeline({
+            targets: platform.body.velocity,
+            loop: -1,
+            tweens: [
+              { x: 0, y: -20, duration: 3700, ease: 'Stepped' },
+              { x: 0, y: 20, duration: 3700, ease: 'Stepped' }
+            ]
+          });
+        
+        this.physics.add.collider(platform, player);
+
+        var platform2 = this.physics.add.image(60, 810, 'platform').setImmovable(true)
+        
+        platform2.setScale(.6)
+        platform2.body.setAllowGravity(false);
+        this.tweens.timeline({
+            targets: platform2.body.velocity,
+            loop: -1,
+            tweens: [
+              { x: 20, y: 0, duration: 3700, ease: 'Stepped' },
+              { x: -20, y: 0, duration: 3700, ease: 'Stepped' }
+            ]
+          });
+        
+        this.physics.add.collider(platform2, player);
+
+        var platform3 = this.physics.add.image(65, 790, 'platform').setImmovable(true)
+       
+        platform3.setScale(.6)
+        platform3.body.setAllowGravity(false);
+        this.tweens.timeline({
+            targets: platform3.body.velocity,
+            loop: -1,
+            tweens: [
+              { x: 0, y: -20, duration: 2500, ease: 'Stepped' },
+              { x: 0, y: 20, duration: 2500, ease: 'Stepped' }
+            ]
+          });
+        
+        this.physics.add.collider(platform3, player);
+
+        var platform4 = this.physics.add.image(100, 720, 'platform').setImmovable(true)
+       
+        platform4.setScale(.6)
+        platform4.body.setAllowGravity(false);
+        this.tweens.timeline({
+            targets: platform4.body.velocity,
+            loop: -1,
+            tweens: [
+              { x: 20, y: -5, duration: 3500, ease: 'Stepped' },
+              { x: -20, y: 5, duration: 3500, ease: 'Stepped' }
+            ]
+          });
+        
+        this.physics.add.collider(platform4, player);
+
+        var platform5 = this.physics.add.image(160, 670, 'platform').setImmovable(true)
+        
+        platform5.setScale(.6)
+        platform5.body.setAllowGravity(false);
+        platform5.body.friction.y = 1;
+        this.tweens.timeline({
+            targets: platform5.body.velocity,
+            loop: -1,
+            tweens: [
+              { x: 0, y: -20, duration: 3700, ease: 'Stepped' },
+              { x: 0, y: 20, duration: 3700, ease: 'Stepped' }
+            ]
+          });
+          
+          this.physics.add.collider(platform5, player);
+
+        var platform6 = this.physics.add.image(130, 610, 'platform').setImmovable(true)
+        platform6.setScale(.6)
+          platform6.body.setAllowGravity(false);
+          platform6.body.friction.y = 1;
+          this.tweens.timeline({
+              targets: platform6.body.velocity,
+              loop: -1,
+              tweens: [
+                { x: 0, y: -20, duration: 2500, ease: 'Stepped' },
+                { x: 0, y: 20, duration: 2500, ease: 'Stepped' }
+              ]
+            });
+            
+            this.physics.add.collider(platform6, player);
+
+         var platform7 = this.physics.add.image(160, 420, 'platform').setImmovable(true)
+            platform7.setScale(.6)
+          platform7.body.setAllowGravity(false);
+          platform7.body.friction.y = 1;
+          this.tweens.timeline({
+              targets: platform7.body.velocity,
+              loop: -1,
+              tweens: [
+                { x: 0, y: -30, duration: 1500, ease: 'Stepped' },
+                { x: 0, y: 30, duration: 1500, ease: 'Stepped' }
+              ]
+            });
+            
+            this.physics.add.collider(platform7, player);
+
+           //set bounds so camera won't exit game world
         this.cameras.main.setBounds(0, 0, map.widthInPixels, map.heightInPixels)
         //make camera follow player
         this.cameras.main.startFollow(player)
-
+        
+  
+        
 //MAP EVENTS WHEN PLAYER REACHES TILE
         //Camera shake on reach first button
         terrain.setTileLocationCallback(49, 7, 2, 1, () => {
@@ -139,10 +285,10 @@ create() {
             terrain.setTileLocationCallback(49, 7, 2, 1, null)
         })
         //Move girlsprite during camera shake
-        this.cameras.main.on('camerashakestart', function () {
+        this.cameras.main.once('camerashakestart', function () {
             player.anims.play('dead', true)
         })
-        this.cameras.main.on('camerashakecomplete', function () {
+        this.cameras.main.once('camerashakecomplete', function () {
             console.log("camera shake complete")
             player.anims.play('dead', true)
             this.cameras.main.fade(2000)
@@ -157,6 +303,16 @@ create() {
             console.log('camerafadeoutcomplete')
             camera.fadeIn(5000)
             }, this)
+
+        
+            terrain.setTileLocationCallback(51, 37, 2, 1, () => {
+                this.cameras.main.flash(500)
+                //Shoot fireball on interval
+
+                terrain.setTileLocationCallback(51, 37, 2, 1, null)
+            })
+            
+
 
 
         //Grass spikes
@@ -205,7 +361,7 @@ create() {
             killPlayer();  
         })
         terrain.setTileLocationCallback(31, 45, 2, 1, () => {
-            killPlayer();
+            // killPlayer();
         })
         terrain.setTileLocationCallback(27, 45, 2, 1, () => {
             killPlayer();
@@ -226,14 +382,11 @@ create() {
             killPlayer();
         })
     
+
      }
+
+    
      
-
-        
-
-
-
-
     update() {
             
 
@@ -261,16 +414,18 @@ create() {
               player.setVelocityX(0);
               if (player.body.onFloor()){
                 player.anims.play('idle', true);
+                
               }
             }
 
-            if (this.cursors.up.isDown && player.body.onFloor()) {
+            if (this.cursors.up.isDown && (player.body.onFloor() || player.body.touching.down)) {
                 player.setVelocityY(-200);
+                
                 player.anims.stop()
                 player.anims.play('jump', true);
             }
           }
-
+          
         //parallax background
         this.background1.tilePositionX = this.cameras.main.scrollX * .1
         this.background2.tilePositionX = this.cameras.main.scrollX * .2
@@ -279,11 +434,8 @@ create() {
         this.background5.tilePositionX = this.cameras.main.scrollX * .2
         this.background6.tilePositionX = this.cameras.main.scrollX * .6
 
-
-
+        
     }
-    
-
 }
 
 
