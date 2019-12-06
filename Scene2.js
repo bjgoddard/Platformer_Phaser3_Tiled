@@ -307,7 +307,7 @@ update() {
                 }
             }
             if ((this.cursors.up.isDown || this.cursors.space.isDown) && (player.body.onFloor() || player.body.touching.down)){
-                player.setVelocityY(-100);
+                player.setVelocityY(-100)
                 player.anims.stop()
                 player.anims.play('jump', true)
                 }
