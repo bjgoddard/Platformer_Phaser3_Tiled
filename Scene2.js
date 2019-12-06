@@ -40,7 +40,6 @@ create() {
 
     //Delayed callback to reset
     const killPlayerReset = () => {
-        
         this.scene.restart()   
         }
 
@@ -186,8 +185,6 @@ create() {
         //Make camera follow player
         this.cameras.main.startFollow(player)
         
-  
-        
     //Map events when player reaches tile coordinates
         //Camera shake on reach first button, remove controls, move player
         terrain.setTileLocationCallback(49, 7, 2, 1, () => {
@@ -283,7 +280,6 @@ create() {
             restartGame()
             terrain.setTileLocationCallback(37, 26, 2, 1, null)
         })
-        
     }
 
 update() {

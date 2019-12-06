@@ -3,13 +3,10 @@
 Progress through the peaceful forest, but beware of spiky grass! In the event that anything unexpected occurs, remain calm by avoiding blue mushrooms and foliage. Move using arrow keys, and jump with up arrow or space.
 
 # Getting Started
-To get started playing Chairman of the Board, you may please:
-
-fork this repo and clone into it on your system through git. Run the index.html in the root folder and enjoy!
-visit //MY GITHUB LINK?
+To play, fork this repository and clone it through git. 
 
 # Prerequisites
-Eyes, fingers (maybe?)
+Eyes, fingers || toes
 
 # Built With
 HTML

@@ -18,7 +18,6 @@ class Scene1 extends Phaser.Scene {
         this.load.audio("winSound", "assets/audio/win.mp3")
         
         this.load.atlas("girl", "assets/girlSpritesheet/girlSprites.png", "assets/girlSpritesheet/girlSprites.json")
-        
 
         //Tiled tilesheets 
         this.load.image("tileset", "assets/image/level1/tileset.png")

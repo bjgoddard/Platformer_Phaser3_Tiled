@@ -5,13 +5,11 @@ const gameConfig = {
     pixelArt: true,
     zoom: 3,
     parent: "gameContainer",
-    
-    // backgroundColor: 0x000000,
     physics: {
         default: 'arcade',
         arcade: {
             gravity: { y: 120 },
-            debug: true
+            debug: false
         }
     },
     scene: [Scene1, Scene2]

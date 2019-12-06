@@ -12,14 +12,5 @@ class Player extends Phaser.Physics.Arcade.Sprite {
         this.setCollideWorldBounds(true)
         this.setDepth(1)
         this.cursors = scene.input.keyboard.createCursorKeys();
-
     }
-
-    create() {
-        
-        
-    }
-    update() {
-    
-  }
 }
