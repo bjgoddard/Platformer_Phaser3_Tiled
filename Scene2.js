@@ -4,10 +4,11 @@ class Scene2 extends Phaser.Scene {
     }
 
 create() {
-    //Level1 Song
+    //Music
     const lostWoods = this.sound.add('lostWoods', {volume: 0.2})
         lostWoods.play()
     const battleSong = this.sound.add('battle', {volume: 0.2})
+    
 
     //Forest background images
     this.background1 = this.add.tileSprite(0, 0, game.config.width, game.config.height, "background1").setOrigin(0,0).setScrollFactor(0)
@@ -26,6 +27,8 @@ create() {
 
     //Player die function
     const killPlayer = () => {
+        lostWoods.stop()
+        battleSong.stop()
         player.dead = true;
         player.setVelocityX(0);
         player.anims.play('dead', true)
@@ -37,7 +40,7 @@ create() {
 
     //Delayed callback to reset
     const killPlayerReset = () => {
-        console.log("killPlayerReset called")
+        
         this.scene.restart()   
         }
 
