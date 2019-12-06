@@ -4,13 +4,15 @@ class Player extends Phaser.Physics.Arcade.Sprite {
         super(scene, x, y, texture, frame);
         scene.sys.updateList.add(this);
         scene.sys.displayList.add(this);
-
         scene.physics.world.enableBody(this)
         this.displayWidth = 16;
         this.displayHeight = 16;
         this.dead = false;
         this.setBounce(-.1)
         this.setCollideWorldBounds(true)
+        this.setDepth(1)
+        this.cursors = scene.input.keyboard.createCursorKeys();
+
     }
 
     create() {
@@ -18,6 +20,6 @@ class Player extends Phaser.Physics.Arcade.Sprite {
         
     }
     update() {
-        
-    }
+    
+  }
 }

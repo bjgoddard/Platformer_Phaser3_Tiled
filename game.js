@@ -1,6 +1,3 @@
-
-
-
 const gameConfig = {
     type: Phaser.AUTO,
     width: 272,
