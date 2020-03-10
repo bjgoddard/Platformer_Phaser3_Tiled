@@ -2,12 +2,6 @@
 
 Progress through the peaceful forest, but beware of spiky grass! In the event that anything unexpected occurs, remain calm by avoiding blue mushrooms and foliage. Move using arrow keys, and jump with up arrow or space.
 
-# Getting Started
-To play, fork this repository and clone it through git. 
-
-# Prerequisites
-Eyes, fingers || toes
-
 # Built With
 HTML
 CSS
