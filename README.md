@@ -20,8 +20,8 @@ As of December 4, 2019 implemented parallax backgrounds, death via spike collisi
 
 As of December 5, 2019 finalized map events and sounds.
 
-If I had more time I would...
-Introduce fireballs for increased difficulty.
+# Future Goals
+With more time, I will introduce fireballs for increased difficulty. At the time, Phaser3 had limited documentation on its capabilities, particularly when using particles with collision, so finding a workaround is necessary.
 
 
 
